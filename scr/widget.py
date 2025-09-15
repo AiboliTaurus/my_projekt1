@@ -5,7 +5,6 @@ def get_mask_card_number(card_number: int) -> str:
     card_str = str(card_number)
     if len(card_str) != 16:
         raise ValueError("Номер карты должен содержать 16 цифр")
-
     return f"{card_str[:4]} {card_str[4:6]}** **** {card_str[-4:]}"
 
 
@@ -16,7 +15,6 @@ def get_mask_account(account_number: int) -> str:
     account_str = str(account_number)
     if len(account_str) < 6:
         raise ValueError("Номер счета должен содержать минимум 6 цифр")
-
     return f"**{account_str[-4:]}"
 
 
@@ -34,16 +32,19 @@ def mask_account_card(input_string: str) -> str:
     number_part = input_string[i:].strip()
 
     try:
-    # Преобразуем номер в число
+        # Преобразуем номер в число
         number = int(number_part)
 
-    # Определяем тип и применяем соответствующую маску
-        if 'Счет' in name_part:
+        # Проверяем наличие слова "счет" без учета регистра
+        if 'счет' in name_part.lower():
             masked_number = get_mask_account(number)
         else:
             masked_number = get_mask_card_number(number)
 
         return f"{name_part} {masked_number}"
+
+    except ValueError:
+        raise ValueError("Ошибка при обработке номера")
 
 from datetime import datetime
 
@@ -64,3 +65,5 @@ def get_date(date_string: str) -> str:
     # Форматируем в нужный формат
             formatted_date = original_date.strftime('%d.%m.%Y')
             return formatted_date
+    except ValueError:
+        raise ValueError("Неверный формат даты. Ожидается формат 'ГГГГ-ММ-ДДТЧЧ:ММ:СС'")
