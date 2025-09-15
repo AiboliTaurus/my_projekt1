@@ -1,24 +1,5 @@
-def get_mask_card_number(card_number: int) -> str:
-    """
-    Маскирует номер карты по шаблону XXXX XX** **** XXXX
-    """
-    card_str = str(card_number)
-    if len(card_str) != 16:
-        raise ValueError("Номер карты должен содержать 16 цифр")
-    return f"{card_str[:4]} {card_str[4:6]}** **** {card_str[-4:]}"
-
-
-def get_mask_account(account_number: int) -> str:
-    """
-    Маскирует номер счета по шаблону **XXXX
-    """
-    account_str = str(account_number)
-    if len(account_str) < 6:
-        raise ValueError("Номер счета должен содержать минимум 6 цифр")
-    return f"**{account_str[-4:]}"
-
-
 def mask_account_card(input_string: str) -> str:
+    from masks import get_mask_account, get_mask_card_number  # Импортируем функции из masks.py
     """
     Маскирует номер карты или счета в зависимости от типа
     """
