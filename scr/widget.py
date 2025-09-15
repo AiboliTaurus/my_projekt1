@@ -34,10 +34,10 @@ def mask_account_card(input_string: str) -> str:
     number_part = input_string[i:].strip()
 
     try:
-        # Преобразуем номер в число
+    # Преобразуем номер в число
         number = int(number_part)
 
-        # Определяем тип и применяем соответствующую маску
+    # Определяем тип и применяем соответствующую маску
         if 'Счет' in name_part:
             masked_number = get_mask_account(number)
         else:
@@ -45,21 +45,22 @@ def mask_account_card(input_string: str) -> str:
 
         return f"{name_part} {masked_number}"
 
-    from datetime import datetime
+from datetime import datetime
 
-    def get_date(date_string: str) -> str:
-        """
-        Преобразует строку с датой из формата ISO в формат ДД.ММ.ГГГГ
 
-        Args:
-            date_string (str): Строка с датой в формате "2024-03-11T02:26:18.671407"
+def get_date(date_string: str) -> str:
+    """
+    Преобразует строку с датой из формата ISO в формат ДД.ММ.ГГГГ
 
-        Returns:
-            str: Дата в формате "ДД.ММ.ГГГГ"
-        """
-        try:
-            # Парсим исходную дату
+    Args:
+    date_string (str): Строка с датой в формате "2024-03-11T02:26:18.671407"
+
+    Returns:
+    str: Дата в формате "ДД.ММ.ГГГГ"
+    """
+    try:
+    # Парсим исходную дату
             original_date = datetime.fromisoformat(date_string)
-            # Форматируем в нужный формат
+    # Форматируем в нужный формат
             formatted_date = original_date.strftime('%d.%m.%Y')
             return formatted_date
